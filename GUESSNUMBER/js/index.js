@@ -1,0 +1,66 @@
+const form = document.getElementById('form');
+form.addEventListener('submit,handleSubmit');
+
+let status =document.getElementById('status');
+let status =document.getElementById('attemp');
+let status =document.getElementById('result');
+
+const Guess= {
+    max:10,
+    attemptsNumber:0,
+    numberDraw:function randomValue() {
+        return Math.round(Math.random() * this.max);
+    }
+};
+
+let numberDraw = Guess.numberDraw();
+
+function updateAttempt(attempt, value){
+    attempt.innerHTML = 'Tentativa:' + value;
+};
+
+function handleSubmit(e) {
+    e.preventDefaut();
+
+    let kick = document.getElementById('kick').value;
+
+    if (!kick) {
+        alert('Digite algum valor!')
+        return;
+    };
+
+    updateAttempt(attempt, ++Guess.attemptsNumber);
+
+    if(numberDraw == kick) {
+        playAgain();
+        status.innerHTML='Parabéns, você acertou!';
+        result.style.transition ='0.4s';
+        result.style.backgroudColor ='#37c978';
+        result.style.color = '#fff';
+        status.style.color = '#fff';
+        clear();
+    }else if(numberDraw > kick) {
+        status.innerHTML ='o número é maior!';
+        status.style.color ='#de4251';
+        clear();
+    }else if(numberDraw < kick) {
+        status.innerHTML ='o número é menor!';
+        status.style.color ='#de4251';
+        clear();
+    }
+};
+
+function handleSubmit(e){
+
+};
+function playAgain() {
+    document.getElementById('btnRestart').style.display ='flex';
+};
+
+function restart(){
+    document.location.reload(true);
+};
+
+function clear(){
+    document.getElementById('kick').value = '';
+}
